@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete post{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{ item.id }}" name="itemsToDelete" />
+        <a href="{{ item.get_absolute_url }}">{{ item.id }}</a>
+        <input type="submit" class="btn btn-primary" value="Confirm deletion" name="confirm_delete" />
+        <input type="submit" class="btn btn-primary" value="Cancel" name="cancel"/>
+    </form>
+{% endblock %}

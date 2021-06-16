@@ -1,0 +1,55 @@
+{% load static %}
+
+<div class="card pt-2" id="{{ post.uuid }}">
+    <div class="card-header align-center">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ post.author.profile.get_absolute_url }}">
+                    {% if post.author.profile.avatar %}
+                        <img src="{{ post.author.profile.avatar.avatar_small.url }}" alt="avtar"class="rounded-circle">
+                    {% else %}
+                        <img src="{% static "no_avatar.png" %}" alt="no avtar" width="32" height="32" class="rounded-circle">
+                    {% endif %}
+                    {{ post.author.username }}
+                </a>
+
+                {% if post.author.id == user.id %}
+                    <button class="delete-button" name="{{ post.uuid }}">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+
+    <a href="{{ post.get_absolute_url }}">
+        {% if post.image %}
+                <img class="card-img-top" src="{{ post.image.large.url}}">
+        {% else %}
+            <img class="card-img-top" src="{% static "no_image.png" %}" width="500">
+        {% endif %}
+    </a>
+    <div class="like card body">
+        <p class="card-text">{{ post.text }}</p>
+        <span class="card-text">
+            {% if user in post.likes.all %}
+                <button class="like-button" id="like_btn_{{ post.uuid }}" uuid="{{ post.uuid }}" action="dislike">
+                    <i class="fa-heart fas" id="like_icon_{{ post.uuid }}"></i>
+                </button>
+            {% else %}
+                <button class="like-button" id="like_btn_{{ post.uuid }}" uuid="{{ post.uuid }}" action="like">
+                    <i class="fa-heart far" id="like_icon_{{ post.uuid }}"></i>
+                </button>
+            {% endif %}
+
+            <span id="like_count_{{ post.uuid }}">
+                {{ post.likes.count }}
+            </span>
+
+        </span>
+    </div>
+    <div class="card-footer text-muted">
+        <p class="card-text text-center"><small class="text-muted ">{{ post.created}}</small></p>
+    </div>
+</div>
+

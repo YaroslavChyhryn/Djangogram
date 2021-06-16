@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    created
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-4">
+                {% if author.profile.avatar %}
+                    <img src="{{ author.profile.avatar.avatar_large.url }}" alt="mdo" width="256" height="256" class="rounded-circle">
+                {% else %}
+                    <img src="{% static "no_avatar.png" %}" alt="mdo" width="256" height="256" class="rounded-circle">
+                {% endif %}
+            </div>
+
+            <div class="col">
+                <div class="row">
+                    <h1>{{ author.first_name }} {{ author.last_name }}</h1>
+                </div>
+                {% if author.id != user.id %}
+                    <div class="row">
+                        {% if following %}
+                            <button class="subscribe-button btn btn-secondary" name="{{ author.id }}" action="unsubscribe">UNSUBSCRIBE!</button>
+                        {% else %}
+                             <button class="subscribe-button btn btn-danger" name="{{ author.id }}" action="subscribe">SUBSCRIBE!</button>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            <p>{{ author.profile.bio }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <hr>
+    <br>
+
+    <div class="container">
+        {% for post in posts %}
+            <div class="d-flex justify-content-center">
+                {% include 'posts/includes/post.html' %}
+            <br>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

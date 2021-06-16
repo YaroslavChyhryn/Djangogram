@@ -1,0 +1,36 @@
+{% load static %}
+<header class="p-1 mb-3 border-bottom">
+    <div class="container d-flex flex-wrap">
+
+        <ul class="nav me-auto">
+            <li class="nav-item"><a href="/" class="nav-link px-2 link-secondary ">Djangogramm</a></li>
+            <li class="nav-item"><a href="{% url 'posts:explore' %}" class="nav-link px-2 link-dark ">Explore</a></li>
+        </ul>
+
+        {% if request.user.is_authenticated %}
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.avatar_small.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    {% else %}
+                        <img src="{% static "no_avatar.png" %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    {% endif %}
+                </a>
+                <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="/post/">New Post</a></li>
+                    <li><a class="dropdown-item" href="{% url 'profile:avatar' %}">Avatar</a></li>
+                    <li><a class="dropdown-item" href="{% url 'profile:settings' %}">Settings</a></li>
+                    <li><a class="dropdown-item" href="{% url "posts:profile" slug=user.username %}">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url "account_logout" %}">Sign out</a></li>
+                </ul>
+            </div>
+        {% else %}
+            <ul class="nav">
+                <li class="nav-item"><a href="{% url "account_login" %}" class="nav-link px-2 link-dark ">Login</a></li>
+                <li class="nav-item"><a href="{% url "account_signup" %}" class="nav-link px-2 link-dark ">Sign up</a></li>
+            </ul>
+        {% endif %}
+
+    </div>
+</header>

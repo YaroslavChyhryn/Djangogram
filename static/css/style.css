@@ -1,0 +1,22 @@
+.like-button>i:hover {color: tomato}
+
+.like-button{
+    border: none;
+    padding: 0;
+    background: none;
+    display: inline-flex;
+}
+
+.delete-button>i:hover {color: gray}
+
+.delete-button{
+    border: none;
+    padding: 0;
+    background: none;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.children {
+    padding-left: 10%;
+}
