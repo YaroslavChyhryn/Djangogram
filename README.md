@@ -1,4 +1,4 @@
-# Task 12 Create basic application - DjangoGramm
+# DjangoGramm
 Program like Instagram. The user can register on the website by email.After basic registration, the user will receive a confirmation of the continuation of registration. The email must have a unique link. The user goes by a link redirected to the profile page and add his full name, bio, and avatar. Next user can use DjangoGramm. He can post images, looks pictures of other users.Unauthorized guests cannot view the profile and pictures of users.
 ## List of used third party apps
 1. allauth - Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication.
